@@ -1,0 +1,24 @@
+class Person
+  include Mongoid::Document
+  paginates_per 10
+  field :NAME_FULL_DISPLAY
+  field :arrivals
+  field :bankruptcy
+  field :births
+  field :census
+  field :convicts
+  field :court
+  field :deaths
+  field :departures
+  field :divorces
+  field "health--welfare"
+  field "hotels--properties"
+  field :immigration
+  field :inquests
+  #field :marriage-permissions
+  field :marriages
+  field :naturalisations
+  field :prisoners
+  field :wills
+  field :ww1
+end
