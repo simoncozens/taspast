@@ -1,8 +1,13 @@
 development:
   clients:
     default:
-       uri: mongodb://dbuser:dbpassword@ds129063-a0.mlab.com:29063,ds129063-a1.mlab.com:29063/heroku_8cslkcgm?replicaSet=rs-ds129063
-  options:
+      database: tasgeneo
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
 
 production:
   clients:
