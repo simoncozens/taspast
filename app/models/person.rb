@@ -98,6 +98,7 @@ class Person
 
   gem 'nokogiri'
   require 'open-uri'
+  require 'open_uri_redirections'
 
   def ww1_references
     if self.ww1
@@ -115,7 +116,7 @@ class Person
       if not url
         return nil
       end
-      doc = Nokogiri::HTML(open(url))
+      doc = Nokogiri::HTML(open(url, :allow_redirections => :safe))
       pic = doc.css('.gallery img').first.attr("src")
       if pic
         return URI.join( url, pic )

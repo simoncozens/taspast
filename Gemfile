@@ -24,3 +24,4 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'kaminari-actionview'
 gem 'rails_12factor', group: :production
+gem 'open_uri_redirections'
