@@ -1,0 +1,39 @@
+<% c = @person.convicts %>
+<div class="row">
+  <h2>Convict History</h2>
+<div class="col-md-8">
+  <%= @person.firstname %> 
+  <%if !c["DEPARTURE_PORT"].empty? %>
+  left <em><%= c["DEPARTURE_PORT"]%></em>
+<% if !c["DEPARTURE_DATE"].empty? %>
+on <em><%= c["DEPARTURE_DATE"] %></em>, <% end %>
+   and <%end %> arrived in Tasmania on
+  <em><%= c["ARRIVAL_DATE"]%></em><% if c["SHIP"] %>
+  on the <em><%= c["SHIP"] %></em><% end %><% if c["VOYAGE_NO"] %>,
+  voyage number <%= c["VOYAGE_NO"]%><%end%>.
+  <br/>
+  <% if !c["EMPLOYER_LINK"].empty? %>
+  They were employed by <%= personlink(c["EMPLOYER_LINK"]) %>.
+  <% end %>
+</div>
+<div class="col-md-4">
+<A href="<%= c["PERMA_LINK"] %>">See record</A>.<br>
+  <%if !c["Conduct_Record"].empty? %>
+<A href="<%= c["Conduct_Record"].gsub(/^.*\|/,"") %>">See conduct record</A>.<br>
+<% end %>
+  <%if !c["Indent"].empty? %>
+<A href="<%= c["Indent"].gsub(/^.*\|/,"") %>">See indent record (information provided on arrival)</A>.<br>
+<% end %>
+
+  <%if !c["Muster_Roll"].empty? %>
+<A href="<%= c["Muster_Roll"].gsub(/^.*\|/,"") %>">See muster roll</A>.<br>
+<% end %>
+  <%if !c["Description_List"].empty? %>
+<A href="<%= c["Description_List"].gsub(/^.*\|/,"") %>">See description list</A>.<br>
+<% end %>
+  <%if !c["Employment"].empty? %>
+<A href="<%= c["Employment"].gsub(/^.*\|/,"") %>">See employment record</A>.<br>
+<% end %>
+
+</div>
+</div>

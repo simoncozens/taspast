@@ -1,0 +1,18 @@
+<% d = @person.departures %>
+<div class="row">
+  <h2>Departed Tasmania</h2>
+<div class="col-md-8">
+  <%= @person.firstname %>  left 
+  <em><%= d["DEPARTURE_PORT"]%></em> on
+  <em><%= d["DEPARTURE_DATE"]%></em><% if d["SHIP"] %>
+  on the <em><%= shiplink(d["SHIP"],"dep") %></em><% end %><% if d["BOUND"] %>, bound for
+  <em><%= d["BOUND"] %></em>.
+  <% end %>
+  <% if !d["NAME_RANK"].empty? %>
+  <% if d["NAME_RANK"] %> They traveled in <%= d["NAME_RANK"] %> class.<% end %>
+  <% end %>
+</div>
+<div class="col-md-4">
+<A href="<%= d["PERMA_LINK"] %>">See record</A>.
+</div>
+</div>

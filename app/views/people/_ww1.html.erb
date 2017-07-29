@@ -1,0 +1,25 @@
+<% w = @person.ww1 %>
+<div class="row">
+  <h2>WW1 Service</h2>
+
+<div class="col-md-8">
+<% if !w["REMARKS"].empty? %>
+<%= w["REMARKS"] %>
+<% end %>
+<% if !w["NAME_RANK"].empty? %>
+<%= @person.firstname %> attained the rank of <%= w["NAME_RANK"] %>.
+<% end %>
+
+</div>
+<div class="col-md-4">
+<img src="<%= @person.photo %>">
+<% if @person.ww1_references.count %>
+Read more about this person at:
+<ul>
+<% @person.ww1_references.each do |k,v| %>
+<li> <%= link_to(k,v) %></li>
+<% end%>
+</ul>
+<% end %>
+</div>
+</div>

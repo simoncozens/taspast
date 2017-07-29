@@ -21,3 +21,5 @@ end
 gem 'mongoid', '~> 5.0'
 gem 'kaminari-mongoid'
 gem 'bootstrap-sass', '~> 3.3.6'
+
+gem 'kaminari-actionview'

@@ -1,0 +1,16 @@
+<% m = @person.marriages %>
+<div class="row">
+  <h2>Married</h2>
+<div class="col-md-8">
+  <%= @person.firstname %>  married 
+  <em><%= personlink(m["SPOUSE"])%></em> on
+  <%= m["MARRIAGE_DATE"] %> at <%= m["REG_PLACE"] %>.
+  <% if m["GENDER"] == "Male" %>He<% else %>She<% end %>
+  was <%= m["AGE"] %> and 
+  <% if m["GENDER"] == "Male" %>she<% else %>he<% end %>
+  was <%= m["SPOUSE_AGE"] %>.
+</div>
+<div class="col-md-4">
+<A href="<%= m["PERMA_LINK"] %>">See record</A>.
+</div>
+</div>

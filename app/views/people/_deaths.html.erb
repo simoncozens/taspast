@@ -1,0 +1,33 @@
+<% d = @person.deaths %>
+<div class="row">
+  <h2>Death</h2>
+<div class="col-md-8">
+  <%= @person.firstname %>
+  died
+  <em><%= d["DEATH_DATE"] %></em>
+  <% if !d["REG_PLACE"].empty? %>at <em><%= d["REG_PLACE"] %></em><% end %>.
+  <% if !d["BURIAL_DATE"].empty?%>
+  <% if d["GENDER"] == "Male" %>He<% else %>She<% end %>
+  was buried on <em> <%= d["BURIAL_DATE"] %></em>.
+  <%end %>
+  <% if d["GENDER"] == "Male" %>He<% else %>She<% end %>
+  was <em><%= d["AGE"] %></em>.
+  <% if !d["DESC"].empty? %> <%= d["DESC"] %> <% end %>
+  <br/>
+  <% if !d["MOTHER"].empty? %>
+  <% if d["GENDER"] == "Male" %>His<% else %>Her<% end %> mother was
+  <%= personlink(d["MOTHER"]) %>.
+  <% end %>
+  <% if !d["FATHER"].empty? %>
+  <% if d["GENDER"] == "Male" %>His<% else %>Her<% end %> father was
+  <%= personlink(d["FATHER"]) %>.
+  <% end %>
+
+</div>
+<div class="col-md-4">
+<A href="<%= d["PERMA_LINK"] %>">See record</A>.
+<% if @person.wills %>
+<br><A href="<%= @person.wills["PERMA_LINK"] %>">See will</A>.
+<% end %>
+</div>
+</div>

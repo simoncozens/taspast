@@ -1,0 +1,11 @@
+<% d = @person.inquests %>
+<div class="row">
+  <h2>Inquests</h2>
+<div class="col-md-8">
+  There was an inquest into <%= @person.firstname %>'s death on
+  <%= d["INQUEST_DATE"] %>.
+</div>
+<div class="col-md-4">
+<A href="<%= d["PERMA_LINK"] %>">See record</A>.
+</div>
+</div>

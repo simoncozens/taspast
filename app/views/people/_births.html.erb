@@ -1,0 +1,23 @@
+<% d = @person.births %>
+<div class="row">
+  <h2>Birth</h2>
+<div class="col-md-8">
+  <%= @person.firstname %>
+  was born
+  <em><%= d["BIRTH_DATE"] %></em>
+  <% if !d["REG_PLACE"].empty? %>at <em><%= d["REG_PLACE"] %></em><% end %>.
+  <br/>
+  <% if !d["MOTHER"].empty? %>
+  <% if d["GENDER"] == "Male" %>His<% else %>Her<% end %> mother was
+  <%= personlink(d["MOTHER"]) %>.
+  <% end %>
+  <% if !d["FATHER"].empty? %>
+  <% if d["GENDER"] == "Male" %>His<% else %>Her<% end %> father was
+  <%= personlink(d["FATHER"]) %>.
+  <% end %>
+
+</div>
+<div class="col-md-4">
+<A href="<%= d["PERMA_LINK"] %>">See record</A>.
+</div>
+</div>

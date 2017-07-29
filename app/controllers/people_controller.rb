@@ -1,10 +1,20 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  def home
+    respond_to do |format|
+      format.html { render :home }
+    end
+  end
+
   # GET /people
   # GET /people.json
   def index
-    @people = Person.page(params[:page]||1)
+    page = params[:page]||1
+    @people = Person.search_from_params(params).page(page)
+    if @people.count == 1
+      redirect_to @people.first
+    end
   end
 
   # GET /people/1

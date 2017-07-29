@@ -1,0 +1,15 @@
+<% d = @person.arrivals %>
+<div class="row">
+  <h2>Arrived in Tasmania</h2>
+<div class="col-md-8">
+  <%= @person.firstname %> 
+  <%if !d["DEPARTURE_PORT"].empty? %>
+  left <em><%= d["DEPARTURE_PORT"]%></em> and <%end %> arrived in Tasmania on
+  <em><%= d["ARRIVAL_DATE"]%></em><% if d["SHIP"] %>
+  on the <em><%= d["SHIP"] %></em><% end %>.
+  <% if !d["AGE"].empty? %> They were <%= d["AGE"] %> years old at the time.<% end %>
+</div>
+<div class="col-md-4">
+<A href="<%= d["PERMA_LINK"] %>">See record</A>.
+</div>
+</div>

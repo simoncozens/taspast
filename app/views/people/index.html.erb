@@ -1,23 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing People</h1>
+<p class="text-center">
+<%= form_tag("/people", method: "get", class: "form-inline") do %>
+  <div class="form-group center-block">
+    <input class="form-control" type="text" value="<%=params[:fts] || params[:NAME_FULL_DISPLAY]%>" name="fts" id="fts">
+      <button type="submit" class="btn btn-primary">Search</button>
+  </div> 
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<form>
+<% if !@people.first %>
+<h2>Nobody found!</h2>
+<% end %>
+<% else if params["departures.SHIP"] %>
+<h2><%= @people.total_count %> passengers on the <%=params["departures.SHIP"]%> </h2>
+<% else %>
+<h2><%= @people.total_count %> people found</h2>
+<% end %>
+        <%= paginate @people %>
+</form>
+<table class="table table-striped">
 
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= person.NAME_FULL_DISPLAY %></td>
-        <td><%= link_to 'Show', person %></td>
+        <td><a href="<%=url_for(person)%>"><%= person.NAME_FULL_DISPLAY %>
+          (b. <%= person.year_of_birth %><%if person.year_of_death != "?" %>,
+          d. <%= person.year_of_death %><% end%>)</a>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<form>
+<%= paginate @people %>
+</form>
 
 <br>
 

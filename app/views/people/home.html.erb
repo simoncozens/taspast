@@ -1,0 +1,14 @@
+<div class="jumbotron">
+  <h1 class="text-center"><%=  number_with_delimiter(Person.count, :delimiter => ',') %> Tasmanians</h1>
+  <p class="text-center">Discover their story</p>
+
+<p class="text-center">
+<%= form_tag("/people", method: "get", class: "form-inline") do %>
+  <div class="form-group center-block">
+    <input class="form-control input-lg" type="text" placeholder="" name="fts" id="fts">
+      <button type="submit" class="btn btn-primary btn-large">Search</button>
+  </div> 
+<% end %>
+</p>
+</div>
+
