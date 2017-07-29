@@ -2,8 +2,9 @@
 
 <h1 class="text-center personname"> <%= @person.name %> </h1>
 <h2 class="text-center">
+<%if @person.year_of_birth != "?" or @person.year_of_death != "?" %>
           (<%if @person.year_of_birth != "?" %>b. <%= @person.year_of_birth %><% end%><%if @person.year_of_death != "?" %><%if @person.year_of_birth != "?" %>, <%end%>d. <%= @person.year_of_death %><% end%>)</h2>
-
+<% end %>
 <% if @person.births %>
 <%= render partial: "births" %>
 <% end %>
