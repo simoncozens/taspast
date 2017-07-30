@@ -29,6 +29,7 @@ class Person
   include Mongoid::Document
   paginates_per 50
   field :NAME_FULL_DISPLAY
+  field :birth_year
   field :arrivals # Done
   field :bankruptcy
   field :births #done
@@ -53,12 +54,42 @@ class Person
     return ["NAME_FULL_DISPLAY", "departures.SHIP"]
   end
 
+  def self.resolve(name,year, critical_year)
+    crit = Person.where({NAME_FULL_DISPLAY: name})
+    if crit.count == 1
+      p = crit.first
+      if p.birth_year == 0
+        p.birth_year = year
+        p.save
+      end
+      if p.birth_year > critical_year
+        return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
+      end
+      return p
+    end
+    crit = Person.where({NAME_FULL_DISPLAY: name, :birth_year.gte => year-1, :birth_year.lte => year+1})
+    if crit.count == 0
+      return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
+    end
+    if crit.count == 1
+      p = crit.first
+      if p.birth_year > critical_year
+        return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
+      end
+      return crit.first
+    end
+    if crit.count > 1
+      return self.resolve(name,0, critical_year)
+    end
+  end
+
   def year_of_birth
     if self.births
       return self.births["PUBDATE"]
     end
-    if self.marriages
-      return self.marriages["PUBDATE"].to_i - self.marriages["AGE"].to_i
+    if self.marriages and self.marriages[1]
+      marr = self.marriages[1]
+      return marr["PUBDATE"].to_i - marr["AGE"].to_i
     end
     if self.deaths
       return self.deaths["PUBDATE"].to_i - self.deaths["AGE"].to_i
@@ -121,6 +152,16 @@ class Person
       if pic
         return URI.join( url, pic )
       end
+    end
+  end
+
+  def ambiguous
+    if birth_year == 0
+      return nil
+    end
+    crit = Person.where({NAME_FULL_DISPLAY: self.name, birth_year: 0})
+    if crit.count == 1
+      return crit.first
     end
   end
 end

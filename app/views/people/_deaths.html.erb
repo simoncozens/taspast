@@ -22,6 +22,9 @@
   <% if d["GENDER"] == "Male" %>His<% else %>Her<% end %> father was
   <%= personlink(d["FATHER"]) %>.
   <% end %>
+  <% if !d["DESC"].empty? %>
+  <p><% d["DESC"] %></p>
+  <% end %>
 
 </div>
 <div class="col-md-4">

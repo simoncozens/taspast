@@ -1,0 +1,31 @@
+
+<% if @person.births %>
+<%= render partial: "births" %>
+<% end %>
+<% if @person.arrivals %>
+<%= render partial: "arrivals" %>
+<% end %>
+
+<% if @person.convicts %>
+<%= render partial: "convicts" %>
+<% end %>
+
+<% if @person.marriages %>
+<%= render partial: "marriages" %>
+<% end %>
+
+<% if @person.departures %>
+<%= render partial: "departures" %>
+<% end %>
+
+<% if @person.ww1 %>
+<%= render partial: "ww1" %>
+<% end %>
+
+<% if @person.deaths %>
+<%= render partial: "deaths" %>
+<% end %>
+
+<% if @person.inquests %>
+<%= render partial: "inquests" %>
+<% end %>

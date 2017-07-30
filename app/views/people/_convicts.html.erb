@@ -1,6 +1,6 @@
-<% c = @person.convicts %>
 <div class="row">
   <h2>Convict History</h2>
+<%@person.convicts.each do |c| %>
 <div class="col-md-8">
   <%= @person.firstname %> 
   <%if !c["DEPARTURE_PORT"].empty? %>
@@ -34,6 +34,6 @@ on <em><%= c["DEPARTURE_DATE"] %></em>, <% end %>
   <%if !c["Employment"].empty? %>
 <A href="<%= c["Employment"].gsub(/^.*\|/,"") %>">See employment record</A>.<br>
 <% end %>
-
 </div>
+<% end %>
 </div>

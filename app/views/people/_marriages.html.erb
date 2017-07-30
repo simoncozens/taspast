@@ -1,4 +1,4 @@
-<% m = @person.marriages %>
+<% @person.marriages.each do |m| %>
 <div class="row">
   <h2>Married</h2>
 <div class="col-md-8">
@@ -14,3 +14,4 @@
 <A href="<%= m["PERMA_LINK"] %>">See record</A>.
 </div>
 </div>
+<% end %>
