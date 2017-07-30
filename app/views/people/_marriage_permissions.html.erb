@@ -4,24 +4,24 @@
 <% @person.marriage_permissions.each do |m| %>
 <div class="col-md-8">
 On <em><%= m["MP_DATE"] %></em>, <%= @person.firstname %> (<em><%
-if m["SHIP_OR_FREE"] == "free" %>
+if m["SHIP_OR_FREE"] == "free" or !m["SHIP_OR_FREE"] %>
 a free person
 <% else %>
-of the ship <%= shiplink(m["SHIP_OR_FREE"])
-  %></em>
-  <%end%>)
+of the ship <%= shiplink(m["SHIP_OR_FREE"],"arr")
+  %>
+  <%end%></em>)
 received permission
-to marry <%= namelink(m["NAME2"]) %>(<em><%
-if m["SHIP_OR_FREE"] == "free" %>
+to marry <%= personlink(m["NAME2"]) %>(<em><%
+if m["SHIP_OR_FREE2"] == "free" or !m["SHIP_OR_FREE2"] %>
 a free person
 <% else %>
-of the ship <%= shiplink(m["SHIP_OR_FREE"])
-  %></em>
-  <%end%>). 
+of the ship <%= shiplink(m["SHIP_OR_FREE2"],"arr")
+  %>
+  <%end%></em>). 
 
 </div>
 <div class="col-md-4">
-<A href="<%= d["PERMA_LINK"] %>">See record</A>.
+<A href="<%= m["PERMA_LINK"] %>">See record</A>.
 </div>
 <% end %>
 

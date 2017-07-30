@@ -8,7 +8,7 @@
   on the <em><%= shiplink(d["SHIP"],"dep") %></em><% end %><% if d["BOUND"] %>, bound for
   <em><%= d["BOUND"] %></em>.
   <% end %>
-  <% if d["NAME_RANK"] and n!d["NAME_RANK"].empty? %>
+  <% if d["NAME_RANK"] and !d["NAME_RANK"].empty? %>
   <% if d["NAME_RANK"] %> They traveled in <%= d["NAME_RANK"] %> class.<% end %>
   <% end %>
 </div>

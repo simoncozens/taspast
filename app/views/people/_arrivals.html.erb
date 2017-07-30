@@ -1,6 +1,6 @@
-<% d = @person.arrivals %>
 <div class="row">
   <h2>Arrived in Tasmania</h2>
+<% @person.arrivals.each do |d| %>
 <div class="col-md-8">
   <%= @person.firstname %> 
   <%if !d["DEPARTURE_PORT"].empty? %>
@@ -12,4 +12,5 @@
 <div class="col-md-4">
 <A href="<%= d["PERMA_LINK"] %>">See record</A>.
 </div>
+<% end %>
 </div>

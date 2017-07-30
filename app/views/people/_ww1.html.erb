@@ -1,7 +1,7 @@
-<% w = @person.ww1 %>
 <div class="row">
   <h2>WW1 Service</h2>
 
+<% @person.ww1.each do |w| %>
 <div class="col-md-8">
 <% if !w["REMARKS"].empty? %>
 <%= w["REMARKS"] %>
@@ -22,4 +22,7 @@ Read more about this person at:
 </ul>
 <% end %>
 </div>
+
+<% end %>
+
 </div>
