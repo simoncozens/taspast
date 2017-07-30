@@ -62,7 +62,7 @@ class Person
         p.birth_year = year
         p.save
       end
-      if p.birth_year > critical_year
+      if p.birth_year > critical_year.to_i
         return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
       end
       return p
@@ -73,7 +73,7 @@ class Person
     end
     if crit.count == 1
       p = crit.first
-      if p.birth_year > critical_year
+      if p.birth_year > critical_year.to_i
         return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
       end
       return crit.first
