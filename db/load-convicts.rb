@@ -9,7 +9,7 @@ bar = ProgressBar.new(count)
 CSV.foreach(filename, :headers => true) do |row|
   who = row["NAME_FULL_DISPLAY"]
   birth_year = 0
-  p = Person.resolve(who,birth_year)
+  p = Person.resolve(who,birth_year, row["YEAR"])
   if not p.convicts
     p.convicts = []
   end

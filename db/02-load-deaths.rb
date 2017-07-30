@@ -15,6 +15,7 @@ CSV.foreach(filename, :headers => true) do |row|
     end
   end
   p = Person.resolve(who,birth_year, row["YEAR"])
+  p.death_year = row["YEAR"].to_i
   p.deaths = row.to_h
   p.save!
   bar.increment!

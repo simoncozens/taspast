@@ -30,6 +30,7 @@ class Person
   paginates_per 50
   field :NAME_FULL_DISPLAY
   field :birth_year
+  field :death_year
   field :arrivals # Done
   field :bankruptcy
   field :births #done
@@ -62,19 +63,19 @@ class Person
         p.birth_year = year
         p.save
       end
-      if p.birth_year > critical_year.to_i
-        return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
+      if p.birth_year > critical_year.to_i or p.death_year < critical_year.to_i
+        return Person.create({NAME_FULL_DISPLAY: name})
       end
       return p
     end
     crit = Person.where({NAME_FULL_DISPLAY: name, :birth_year.gte => year-1, :birth_year.lte => year+1})
     if crit.count == 0
-      return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
+      return Person.create({NAME_FULL_DISPLAY: name})
     end
     if crit.count == 1
       p = crit.first
-      if p.birth_year > critical_year.to_i
-        return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
+      if p.birth_year > critical_year.to_i or p.death_year < critical_year.to_i
+        return Person.create({NAME_FULL_DISPLAY: name})
       end
       return crit.first
     end
@@ -84,6 +85,9 @@ class Person
   end
 
   def year_of_birth
+    if self.birth_year != 0
+      return self.birth_year
+    end
     if self.births
       return self.births["PUBDATE"]
     end
