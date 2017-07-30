@@ -10,9 +10,9 @@ CSV.foreach(filename, :headers => true) do |row|
   who = row["NAME_FULL_DISPLAY"]
   p = Person.resolve(who,0,row["YEAR"])
   if not p.arrivals
-    p.departures = []
+    p.arrivals = []
   end
-  p.departures << row.to_h
+  p.arrivals << row.to_h
   p.save!
   bar.increment!
 end
