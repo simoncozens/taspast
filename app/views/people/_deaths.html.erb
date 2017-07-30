@@ -11,7 +11,7 @@
   was buried on <em> <%= d["BURIAL_DATE"] %></em>.
   <%end %>
   <% if d["GENDER"] == "Male" %>He<% else %>She<% end %>
-  was <em><%= d["AGE"] %></em>.
+  was <em><%= d["AGE"].empty? ? @person.death_year-@person.birth_year : d["AGE"] %></em>.
   <% if !d["DESC"].empty? %> <%= d["DESC"] %> <% end %>
   <br/>
   <% if !d["MOTHER"].empty? %>

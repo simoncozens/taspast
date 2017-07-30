@@ -63,30 +63,34 @@ class Person
         p.birth_year = year
         p.save
       end
-      if p.birth_year > critical_year.to_i or p.death_year < critical_year.to_i
-        return Person.create({NAME_FULL_DISPLAY: name})
+      if p.birth_year > critical_year.to_i or (p.death_year and p.death_year < critical_year.to_i)
+        return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
       end
       return p
     end
     crit = Person.where({NAME_FULL_DISPLAY: name, :birth_year.gte => year-1, :birth_year.lte => year+1})
     if crit.count == 0
-      return Person.create({NAME_FULL_DISPLAY: name})
+      return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
     end
     if crit.count == 1
       p = crit.first
-      if p.birth_year > critical_year.to_i or p.death_year < critical_year.to_i
-        return Person.create({NAME_FULL_DISPLAY: name})
+      if p.birth_year > critical_year.to_i or (p.death_year and p.death_year < critical_year.to_i)
+        return Person.create({NAME_FULL_DISPLAY: name, birth_year: year})
       end
       return crit.first
     end
     if crit.count > 1
-      return self.resolve(name,0, critical_year)
+      crit = Person.where({NAME_FULL_DISPLAY: name, birth_year: 0})
+      if crit.count == 1
+        return crit.first
+      end
+      return Person.create({NAME_FULL_DISPLAY: name, birth_year: 0})
     end
   end
 
   def year_of_birth
-    if self.birth_year != 0
-      return self.birth_year
+    if birth_year != 0
+      return birth_year
     end
     if self.births
       return self.births["PUBDATE"]
@@ -95,7 +99,7 @@ class Person
       marr = self.marriages[1]
       return marr["PUBDATE"].to_i - marr["AGE"].to_i
     end
-    if self.deaths
+    if self.deaths and self.deaths["AGE"].to_i > 0
       return self.deaths["PUBDATE"].to_i - self.deaths["AGE"].to_i
     end
     return "?"
@@ -103,6 +107,9 @@ class Person
 
 
   def year_of_death
+    if death_year
+      return death_year
+    end
     if self.deaths
       return self.deaths["PUBDATE"].to_i
     end
@@ -119,7 +126,8 @@ class Person
 
     end
     self.where(clause).include_text_search_score.sort_by_text_search_score.only(
-        :NAME_FULL_DISPLAY, :deaths, :marriages, :births
+        :NAME_FULL_DISPLAY, :deaths, :marriages, :births,
+        :birth_year, :death_year
     )
   end
 
