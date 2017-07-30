@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.4.1'
 
 gem 'rails', '4.2.9'
 gem 'sass-rails', '~> 5.0'
@@ -25,3 +26,4 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'kaminari-actionview'
 gem 'rails_12factor', group: :production
 gem 'open_uri_redirections'
+gem 'progress_bar'
