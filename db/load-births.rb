@@ -1,5 +1,11 @@
 require "CSV"
-  CSV.foreach("data/births.csv", :headers => true) do |row|
+filename = "data/births.csv"
+count = %x{wc -l #{filename}}.split.first.to_i
+
+require 'progress_bar'
+bar = ProgressBar.new(count)
+
+  CSV.foreach(filename, :headers => true) do |row|
     who = row["NAME_FULL_DISPLAY"]
 
     person = Person.create({
@@ -7,4 +13,5 @@ require "CSV"
       birth_year: row["YEAR"].to_i || ROW["REG_YEAR"].to_i,
       births: row.to_h
       })
+    bar.increment!
   end

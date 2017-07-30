@@ -15,7 +15,7 @@ CSV.foreach(filename, :headers => true) do |row|
       birth_year = y.to_i - row["AGE"].to_i
     end
   end
-  p = Person.resolve(who,birth_year)
+  p = Person.resolve(who,birth_year, row["YEAR"])
   if not p.marriages
     p.marriages = []
   end
