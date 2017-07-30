@@ -39,11 +39,11 @@ class Person
   field :deaths #done
   field :departures #done
   field :divorces
-  field "health--welfare"
-  field "hotels--properties"
+  field :health_welfare
+  field :hotels_properties
   field :immigration
-  field :inquests
-  #field :marriage-permissions
+  field :inquests # done
+  field :marriage_permissions
   field :marriages #done
   field :naturalisations
   field :prisoners
